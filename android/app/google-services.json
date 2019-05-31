@@ -8,43 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:13030136767:android:a32c0633eb361591",
-        "android_client_info": {
-          "package_name": "com.example.firebase_login"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "13030136767-sqhul2lab7plin0iap5eh1at58ro6nue.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.firebase_login",
-            "certificate_hash": "9e122e074c197c02848087baec81f741c35c3622"
-          }
-        },
-        {
-          "client_id": "13030136767-lk19kvvd9i6abbfrrt2uh3emabjq2oga.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCfCfynlJNC5Kh9KqJjBa49pxJFFEyhVWM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "13030136767-lk19kvvd9i6abbfrrt2uh3emabjq2oga.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:13030136767:android:80714a21b1bd8b71",
         "android_client_info": {
           "package_name": "com.example.providerlogin"
@@ -60,20 +23,20 @@
           }
         },
         {
-          "client_id": "13030136767-lk19kvvd9i6abbfrrt2uh3emabjq2oga.apps.googleusercontent.com",
+          "client_id": "13030136767-03d4f7dc71nsfdkabpfticbr2sgtcraj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCfCfynlJNC5Kh9KqJjBa49pxJFFEyhVWM"
+          "current_key": "AIzaSyAaSfpnbxD3tPl5VodhAv4Sta9E-HSyy_0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "13030136767-lk19kvvd9i6abbfrrt2uh3emabjq2oga.apps.googleusercontent.com",
+              "client_id": "13030136767-l77dc9inkk9efft2nn171n8o02v6q85u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

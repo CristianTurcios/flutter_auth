@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:providerlogin/model/user_repository.dart';
+import 'package:aad_oauth/aad_oauth.dart';
+import 'package:aad_oauth/model/config.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,6 +15,13 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _password;
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
+  static final Config config = new Config(
+    "7cbac582-454f-462e-b992-5642da630bbf",
+    "7d78c2b8-7374-4a64-af14-e9f66463011e",
+    "openid profile offline_access",
+    "https://login.live.com/oauth20_desktop.srf",
+  );
+  final AadOAuth oauth = AadOAuth(config);
 
   @override
   void initState() {
@@ -113,6 +122,37 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
+              SizedBox(height: 20),
+              user.status == Status.Authenticating
+                  ? Center(child: CircularProgressIndicator())
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Material(
+                        elevation: 5.0,
+                        borderRadius: BorderRadius.circular(30.0),
+                        color: Colors.red,
+                        child: MaterialButton(
+                          onPressed: () async {
+                            try {
+                              await oauth.login();
+                              String accessToken = await oauth.getAccessToken();
+                              showMessage(
+                                  "Logged in successfully, your access token: $accessToken");
+                            } catch (e) {
+                              print('Error $e');
+                              // showError(e);
+                              logoutO365();
+                            }
+                          },
+                          child: Text(
+                            "Sign In With Office 365",
+                            style: style.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
@@ -120,10 +160,30 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void showError(dynamic ex) {
+    showMessage(ex.toString());
+  }
+
   @override
   void dispose() {
     _email.dispose();
     _password.dispose();
     super.dispose();
+  }
+
+  void showMessage(String text) {
+    var alert = new AlertDialog(content: new Text(text), actions: <Widget>[
+      new FlatButton(
+          child: const Text("Ok"),
+          onPressed: () {
+            Navigator.pop(context);
+          })
+    ]);
+    showDialog(context: context, builder: (BuildContext context) => alert);
+  }
+
+  void logoutO365() async {
+    await oauth.logout();
+    showMessage("Logged out");
   }
 }
