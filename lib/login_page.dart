@@ -133,16 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.red,
                         child: MaterialButton(
                           onPressed: () async {
-                            try {
-                              await oauth.login();
-                              String accessToken = await oauth.getAccessToken();
-                              showMessage(
-                                  "Logged in successfully, your access token: $accessToken");
-                            } catch (e) {
-                              print('Error $e');
-                              // showError(e);
-                              logoutO365();
-                            }
+                            if (!await user.signInWithO365()) logoutO365();
                           },
                           child: Text(
                             "Sign In With Office 365",
@@ -158,10 +149,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  void showError(dynamic ex) {
-    showMessage(ex.toString());
   }
 
   @override
@@ -180,6 +167,10 @@ class _LoginPageState extends State<LoginPage> {
           })
     ]);
     showDialog(context: context, builder: (BuildContext context) => alert);
+  }
+
+  void showError(dynamic ex) {
+    showMessage(ex.toString());
   }
 
   void logoutO365() async {
