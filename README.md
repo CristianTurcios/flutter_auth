@@ -1,10 +1,11 @@
+# Fork from: [providerLogin](https://github.com/itsatifsiddiqui/providerLogin)
+
 # Firebase Login Using Provider
 
 A solid and extensible Implementaion of firebase login using provider package.
-1. LOGIN WITH EMAIL AND PASSWORD
-2. LOGIN USING GOOGLE SIGN IN
+1. Login with email and password
+2. Login using google sign in
+3. Login using microsoft azure (but doesnt create a record in firebase, Working on it)
 
 # FINAL RESULT
-![vlcrecord2019051615h38m55s](https://user-images.githubusercontent.com/46827004/57847985-3ade9480-77f1-11e9-9f86-9cf18562e600.gif)
-
-
+![flutter auth](https://github.com/CristianTurcios/flutter_auth/blob/master/final_result.png)
