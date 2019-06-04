@@ -1,4 +1,4 @@
-# Fork from: [providerLogin](https://github.com/itsatifsiddiqui/providerLogin)
+# Fork from: [itsatifsiddiqui/providerLogin](https://github.com/itsatifsiddiqui/providerLogin)
 
 # Firebase Login Using Provider
 
