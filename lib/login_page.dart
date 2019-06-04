@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final _key = GlobalKey<ScaffoldState>();
   static final Config config = new Config(
     "7cbac582-454f-462e-b992-5642da630bbf",
-    "7d78c2b8-7374-4a64-af14-e9f66463011e",
+    "12492267-1ded-40b8-bfef-7e6164d57d02",
     "openid profile offline_access",
     "https://login.live.com/oauth20_desktop.srf",
   );
@@ -133,7 +133,11 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.red,
                         child: MaterialButton(
                           onPressed: () async {
-                            if (!await user.signInWithO365()) logoutO365();
+                            // final String info = await user.signInWithO365();
+                            // if (info == null ) logoutO365();
+                            // else UserInfoPageMicrosoft(token: info);
+                            await user.signInWithO365();
+                            logoutO365();
                           },
                           child: Text(
                             "Sign In With Office 365",
@@ -176,5 +180,31 @@ class _LoginPageState extends State<LoginPage> {
   void logoutO365() async {
     await oauth.logout();
     showMessage("Logged out");
+  }
+}
+
+class UserInfoPageMicrosoft extends StatelessWidget {
+  final String token = '';
+
+  const UserInfoPageMicrosoft({Key key, token}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("User Token"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(token),
+            RaisedButton(
+              child: Text("SIGN OUT"),
+              onPressed: () => Provider.of<UserRepository>(context).signOut(),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -26,6 +26,7 @@ class UserRepository with ChangeNotifier {
       _status = Status.Authenticating;
       notifyListeners();
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+
       return true;
     } catch (e) {
       _status = Status.Unauthenticated;
@@ -34,15 +35,15 @@ class UserRepository with ChangeNotifier {
     }
   }
 
-  Future<bool> signInWithO365() async {
+  Future<String> signInWithO365() async {
     _status = Status.Authenticating;
     notifyListeners();
 
     final Config config = new Config(
-      "7cbac582-454f-462e-b992-5642da630bbf",
-      "7d78c2b8-7374-4a64-af14-e9f66463011e",
-      "openid profile offline_access",
-      "msal7d78c2b8-7374-4a64-af14-e9f66463011e://auth"
+    "7cbac582-454f-462e-b992-5642da630bbf",
+    "12492267-1ded-40b8-bfef-7e6164d57d02",
+    "openid profile offline_access",
+    "https://login.live.com/oauth20_desktop.srf",
     );
 
     final AadOAuth oauth = AadOAuth(config);
@@ -50,14 +51,15 @@ class UserRepository with ChangeNotifier {
     try {
       await oauth.login();
       String accessToken = await oauth.getAccessToken();
-      // showMessage("Logged in successfully, your access token: $accessToken");
       print("Logged in successfully, your access token: $accessToken");
-      return true;
+       _status = Status.Unauthenticated;
+       notifyListeners();
+      return accessToken;
     } catch (e) {
       print('Error $e');
       _status = Status.Unauthenticated;
       notifyListeners();
-      return false;
+      return null;
     }
   }
 
