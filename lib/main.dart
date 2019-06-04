@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:providerlogin/login_page.dart';
 import 'package:providerlogin/model/user_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(MyApp());
 
@@ -73,7 +72,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: Center(
-        child: Text("Splash Screen"),
+        child: Text("Welcome to Onecampus by Laureate"),
       ),
     );
   }

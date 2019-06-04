@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:aad_oauth/aad_oauth.dart';
 import 'package:aad_oauth/model/config.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
@@ -98,7 +99,24 @@ class UserRepository with ChangeNotifier {
     } else {
       _user = firebaseUser;
       _status = Status.Authenticated;
+      _storeFirebase(_user);
     }
     notifyListeners();
+  }
+
+  Future<void> _storeFirebase(FirebaseUser firebaseUser) async {
+    String firstName = '';
+    String lastName = '';
+
+    if(firebaseUser.providerData.where((element) => element.providerId == 'google.com').length > 0 ) {
+     firstName = firebaseUser.displayName.split(' ')[0];
+     lastName = firebaseUser.displayName.split(' ')[1];   
+    }
+
+    Firestore.instance.collection('users').document().setData({ 
+      'email': firebaseUser.email, 
+      'first_name': firstName, 
+      'last_name': lastName
+    });
   }
 }

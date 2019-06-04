@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        title: Text("Demo"),
+        title: Text("Onecampus by Laureate"),
       ),
       body: Form(
         key: _formKey,
